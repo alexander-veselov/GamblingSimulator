@@ -1,11 +1,20 @@
 #pragma once
 
+#include "Symbols.h"
+#include "Lines.h"
+
+#include <vector>
+
 class Slot
 {
 public:
-    Slot(size_t lines, size_t reels);
-    size_t MakeSpin() const;
+    Slot(size_t linesCount, size_t reelsCount, const Symbols& symbols, const Lines& lines);
+    size_t MakeSpin();
+    Board GetLastBoard() const;
 private:
-    size_t m_lines = 0;
-    size_t m_reels = 0;
+    size_t m_linesCount = 0;
+    size_t m_reelsCount = 0;
+    Board m_board;
+    Lines m_lines;
+    Symbols m_symbols;
 };
