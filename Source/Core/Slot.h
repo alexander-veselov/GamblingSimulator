@@ -10,7 +10,9 @@ class Slot
 public:
     Slot(size_t linesCount, size_t reelsCount, const Symbols& symbols, const Lines& lines);
     size_t MakeSpin();
-    const Board& GetLastBoard() const;
+    void GenerateRandomBoard();
+    void SetBoard(const Board& board);
+    const Board& GetBoard() const;
 private:
     size_t m_linesCount = 0;
     size_t m_reelsCount = 0;

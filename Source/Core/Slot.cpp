@@ -6,7 +6,7 @@ Slot::Slot(size_t linesCount, size_t reelsCount, const Symbols& symbols, const L
     m_symbols(symbols), m_lines(lines)
 {}
 
-size_t Slot::MakeSpin()
+void Slot::GenerateRandomBoard()
 {
     for (size_t line = 0; line < m_linesCount; ++line)
     {
@@ -15,6 +15,15 @@ size_t Slot::MakeSpin()
             m_board[line][reel] = m_symbols.GetRandomSymbol();
         }
     }
+}
+
+void Slot::SetBoard(const Board& board)
+{
+    m_board = board;
+}
+
+size_t Slot::MakeSpin()
+{
     std::vector<Match> matches = m_lines.GetMatches(m_board);
 
     size_t pay = 0;
@@ -26,7 +35,7 @@ size_t Slot::MakeSpin()
     return pay;
 }
 
-const Board& Slot::GetLastBoard() const
+const Board& Slot::GetBoard() const
 {
     return m_board;
 }

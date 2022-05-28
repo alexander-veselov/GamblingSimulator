@@ -1,7 +1,7 @@
 #pragma once
 
 #include "IEventListener.h"
-#include "Application/Platform.h"
+#include "Application.h"
 
 #include <memory>
 #include <vector>

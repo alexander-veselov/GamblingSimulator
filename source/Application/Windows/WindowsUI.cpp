@@ -24,14 +24,14 @@ class WindowsDisplay : public IDisplay
 		{
 			for (const Symbol& symbol : line)
 			{
-				std::cout << symbol.GetName() << " ";
+				std::cout << '\t' << symbol.GetName() << " ";
 			}
 			std::cout << std::endl;
 		}
 
-		std::cout << "Last win: " << displayData.lastWin << std::endl;
-		std::cout << "Spent total: " << displayData.spentTotal << std::endl;
-		std::cout << "Won total: " << displayData.wonTotal << std::endl;
+		std::cout << "Last win: " << displayData.lastWin << "     " << std::endl;
+		std::cout << "Spent total: " << displayData.spentTotal << "     " << std::endl;
+		std::cout << "Won total: " << displayData.wonTotal << "     " << std::endl;
 	}
 };
 
@@ -49,5 +49,11 @@ std::shared_ptr<IDisplay> WindowsUI::GetDisplay()
 
 std::queue<Event> WindowsUI::GetEvents()
 {
-	return {};
+	std::queue<Event> eventQueue;
+	if (GetAsyncKeyState(VK_SPACE) & 0x80000000)
+	{
+		eventQueue.push(Event::KEY_PRESSED);
+		eventQueue.push(Event::UPDATE);
+	}
+	return eventQueue;
 }

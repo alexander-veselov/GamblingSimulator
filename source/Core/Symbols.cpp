@@ -8,7 +8,15 @@ namespace
 
 constexpr int kMinimumReelsCount = 3;
 
-double GetRandomNumber()
+double GetRandomNumber_Exponential()
+{
+    static std::random_device dev;
+    static std::mt19937 rng(dev());
+    static std::exponential_distribution<> distr(1.0);
+    return distr(rng);
+}
+
+double GetRandomNumber_Uniform()
 {
     static std::random_device dev;
     static std::mt19937 rng(dev());
@@ -65,7 +73,7 @@ Symbol const& Symbols::GetRandomSymbol() const
     double left = 0;
     double right = m_symbols[0].first;
     
-    double randomNumber = GetRandomNumber();
+    double randomNumber = GetRandomNumber_Uniform();
     for (size_t i = 1; i < m_symbols.size(); ++i)
     {
         left = right;
