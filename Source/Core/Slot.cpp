@@ -26,7 +26,7 @@ size_t Slot::MakeSpin()
     return pay;
 }
 
-Board Slot::GetLastBoard() const
+const Board& Slot::GetLastBoard() const
 {
     return m_board;
 }
