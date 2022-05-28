@@ -1,21 +1,23 @@
 #pragma once
 
-#include "ISubscriable.h"
+#include "IEventListener.h"
 #include "Display.h"
+#include "Platform.h"
+
 #include "../Core/Slot.h"
 
 #include <memory>
 
-class Application : public ISubscriable
+class Application : public IEventListener
 {
 public:
-    Application(std::shared_ptr<IDisplay> display);
-    void Process(Event event) override;
+    Application(std::shared_ptr<IPlatform> platform);
+    void Handle(Event event) override;
 private:
     void OnKeyPressed();
 private:
     Slot m_slot;
-    std::shared_ptr<IDisplay> m_display;
+    std::shared_ptr<IPlatform> m_platform;
 
     // TODO: extract to separate class
     size_t m_lastWin = 0;

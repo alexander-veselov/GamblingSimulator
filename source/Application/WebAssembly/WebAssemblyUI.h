@@ -2,10 +2,10 @@
 
 #include "../Platform.h"
 
-class WindowsUI : public IPlatform
+class WebAssemblyUI : public IPlatform
 {
 public:
-    WindowsUI();
+    WebAssemblyUI();
     std::shared_ptr<IDisplay> GetDisplay() override;
     std::queue<Event> GetEvents() override;
 private:

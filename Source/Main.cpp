@@ -4,10 +4,10 @@
 
 int main()
 {
-	Platform platform;
-	Application application(platform.GetDisplay());
+	std::shared_ptr<IPlatform> platform = GetCurrentPlatform();
+	std::shared_ptr<Application> application(new Application(platform));
 
-	EventLoop eventLoop;
-	eventLoop.Subscribe(std::make_shared<Application>(application));
+	EventLoop eventLoop(platform);
+	eventLoop.AddEventListener(application);
 	return eventLoop.Run();
 }

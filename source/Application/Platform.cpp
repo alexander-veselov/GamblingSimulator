@@ -1,13 +1,16 @@
 #include "Platform.h"
 
+#if __EMSCRIPTEN__
+#include "WebAssembly/WebAssemblyUI.h"
+#else
 #include "Windows/WindowsUI.h"
+#endif
 
-Platform::Platform()
+std::shared_ptr<IPlatform> GetCurrentPlatform()
 {
-    m_pDisplay.reset(new WindowsUI());
-}
-
-std::shared_ptr<IDisplay> Platform::GetDisplay() const
-{
-    return m_pDisplay;
+#if __EMSCRIPTEN__
+    return std::shared_ptr<IPlatform>(new WebAssemblyUI());
+#else
+    return std::shared_ptr<IPlatform>(new WindowsUI());
+#endif
 }

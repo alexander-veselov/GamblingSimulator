@@ -20,16 +20,16 @@ namespace
 	}
 }
 
-Application::Application(std::shared_ptr<IDisplay> display)
-	: m_slot(GetSlot()), m_display(display)
+Application::Application(std::shared_ptr<IPlatform> platform)
+	: m_slot(GetSlot()), m_platform(platform)
 {}
 
-void Application::Process(Event event)
+void Application::Handle(Event event)
 {
 	switch (event)
 	{
 	case Event::UPDATE:
-		m_display->Display(DisplayData(m_lastWin, m_wonTotal, m_spentTotal, m_slot.GetLastBoard()));
+		m_platform->GetDisplay()->Display(DisplayData(m_lastWin, m_wonTotal, m_spentTotal, m_slot.GetLastBoard()));
 		break;
 	case Event::KEY_PRESSED:
 		OnKeyPressed();

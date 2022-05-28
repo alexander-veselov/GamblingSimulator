@@ -22,7 +22,12 @@
     <ClCompile Include="Application\Application.cpp" />
     <ClCompile Include="Application\EventLoop.cpp" />
     <ClCompile Include="Application\Platform.cpp" />
-    <ClCompile Include="Application\Windows\WindowsUI.cpp" />
+    <ClCompile Include="Application\WebAssembly\WebAssemblyUI.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="Application\Windows\WindowsUI.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Emscripten'">true</ExcludedFromBuild>
+    </ClCompile>
     <ClCompile Include="Core\Lines.cpp" />
     <ClCompile Include="Core\Slot.cpp" />
     <ClCompile Include="Core\Symbols.cpp" />
@@ -32,10 +37,15 @@
   <ItemGroup>
     <ClInclude Include="Application\Application.h" />
     <ClInclude Include="Application\EventLoop.h" />
-    <ClInclude Include="Application\ISubscriable.h" />
+    <ClInclude Include="Application\IEventListener.h" />
     <ClInclude Include="Application\Display.h" />
     <ClInclude Include="Application\Platform.h" />
-    <ClInclude Include="Application\Windows\WindowsUI.h" />
+    <ClInclude Include="Application\WebAssembly\WebAssemblyUI.h">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>
+    </ClInclude>
+    <ClInclude Include="Application\Windows\WindowsUI.h">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Emscripten'">true</ExcludedFromBuild>
+    </ClInclude>
     <ClInclude Include="Core\Lines.h" />
     <ClInclude Include="Core\Slot.h" />
     <ClInclude Include="Core\Symbols.h" />
@@ -85,6 +95,7 @@
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Emscripten'">
     <Link>
       <HtmlShellFile>Index.html;%(HtmlShellFile)</HtmlShellFile>
+      <EmBind>true</EmBind>
     </Link>
     <ClCompile>
       <PrecompiledHeader>NotUsing</PrecompiledHeader>

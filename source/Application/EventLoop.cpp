@@ -1,26 +1,38 @@
 #include "EventLoop.h"
 
-#include <Windows.h> // TODO: kill yourself
+#if __EMSCRIPTEN__
+#include <emscripten/emscripten.h>
+#endif
 
-void EventLoop::Subscribe(std::shared_ptr<ISubscriable> pSubscriable)
+EventLoop::EventLoop(std::shared_ptr<IPlatform> platform)
+    : m_platform(platform)
+{}
+
+void EventLoop::AddEventListener(std::shared_ptr<IEventListener> pEventListener)
 {
-    m_subcribed.push_back(pSubscriable);
+    m_EventListeners.push_back(pEventListener);
 }
 
-std::vector<Event> EventLoop::GetEvents() const
+int EventLoop::Run()
 {
-    if (GetAsyncKeyState(VK_SPACE) & 0x80000000)
-        return { Event::KEY_PRESSED, Event::UPDATE };
-    return { Event::IDLE };
-}
-
-int EventLoop::Run() const
-{
+#if __EMSCRIPTEN__
+    auto wrapper = [](void *arg) { static_cast<EventLoop*>(arg)->ProcessFrame(); };
+    emscripten_set_main_loop_arg(wrapper, this, 144, true);
+#else
     while (true)
-    {
-        for (Event e : GetEvents())
-            for (const auto& subscriable : m_subcribed)
-                subscriable->Process(e);
-    }
+        ProcessFrame();
+#endif
     return 0;
+}
+
+void EventLoop::ProcessFrame()
+{
+    m_eventQueue = m_platform->GetEvents();
+    while (!m_eventQueue.empty())
+    {
+        Event e = m_eventQueue.front();
+        m_eventQueue.pop();
+        for (const auto& eventListener : m_EventListeners)
+            eventListener->Handle(e);
+    }
 }

@@ -7,7 +7,7 @@ enum class Event
     KEY_PRESSED = 2,
 };
 
-struct ISubscriable
+struct IEventListener
 {
-    virtual void Process(Event event) = 0;
+    virtual void Handle(Event event) = 0;
 };

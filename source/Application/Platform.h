@@ -1,14 +1,15 @@
 #pragma once
 
 #include "Display.h"
+#include "IEventListener.h"
 
 #include <memory>
+#include <queue>
 
-class Platform
+struct IPlatform
 {
-public:
-    Platform();
-    std::shared_ptr<IDisplay> GetDisplay() const;
-private:
-    std::shared_ptr<IDisplay> m_pDisplay;
+    virtual std::shared_ptr<IDisplay> GetDisplay() = 0;
+    virtual std::queue<Event> GetEvents() = 0;
 };
+
+std::shared_ptr<IPlatform> GetCurrentPlatform();
