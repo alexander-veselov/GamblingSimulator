@@ -23,17 +23,23 @@ Application::Application(std::shared_ptr<IPlatform> platform)
 	: m_slot(GetSlot()), m_platform(platform)
 {}
 
+void Application::set(SDL_Renderer* scr)
+{
+	this->scr = scr;
+}
+
 void Application::Handle(Event event)
 {
 	switch (event)
 	{
 	case Event::UPDATE:
-		m_platform->GetDisplay()->Display(DisplayData(m_lastWin, m_wonTotal, m_spentTotal, m_slot.GetBoard()));
+	case Event::IDLE:
+		m_platform->GetDisplay()->Display(DisplayData(m_lastWin, m_wonTotal, m_spentTotal, m_slot.GetBoard(), scr));
 		break;
 	case Event::KEY_PRESSED:
 		OnKeyPressed();
 		break;
-	case Event::IDLE:
+	
 		break;
 	}
 }

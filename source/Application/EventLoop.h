@@ -12,7 +12,7 @@ class EventLoop
 public:
     EventLoop(std::shared_ptr<IPlatform> platform);
     void AddEventListener(std::shared_ptr<IEventListener> pEventListener);
-    int Run();
+    int Run(std::shared_ptr<Application> application);
     void ProcessFrame();
 private:
     std::vector<std::shared_ptr<IEventListener>> m_EventListeners;
