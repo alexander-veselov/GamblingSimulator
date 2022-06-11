@@ -60,7 +60,10 @@ add_executable(${PROJECT_NAME} ${ALL_SOURCES})
 add_executable(${TESTS_NAME} ${TESTS_SOURCES})
 
 target_link_libraries(${TESTS_NAME} gtest gtest_main)
-add_test(${TESTS_NAME} COMMAND ${TESTS_NAME})
+add_test(
+  NAME ${TESTS_NAME}
+  COMMAND $<TARGET_FILE:${TESTS_NAME}>
+)
 
 set(THIRD_PARTY_PATH ${CMAKE_SOURCE_DIR}/third-party)
 
