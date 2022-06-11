@@ -48,4 +48,5 @@ jobs:
 
             - name: Build
               shell: cmake -P {0}
-              run: cmake --preset "x64-debug"
+              run: |
+                execute_process(cmake --preset "x64-debug")
