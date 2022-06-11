@@ -5,7 +5,7 @@ env:
     NINJA_VERSION: 1.10.0
 jobs:
     build:
-        runs-on: ubuntu-latest
+        runs-on: windows-latest
         steps:
             - uses: actions/checkout@v2
 
