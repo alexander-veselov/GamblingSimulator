@@ -1,0 +1,1 @@
+emrun D:\Projects\RoflCasino\out\emscripten\RoflCasino.html

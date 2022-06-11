@@ -1,0 +1,48 @@
+{
+	"version": 3,
+	"cmakeMinimumRequired": {
+		"major": 3,
+		"minor": 10,
+		"patch": 0
+	},
+	"configurePresets": [
+		{
+			"name": "x64-release",
+			"displayName": "x64 Release",
+			"generator": "Ninja",
+			"cacheVariables": {
+				"CMAKE_BUILD_TYPE": "Release",
+				"CMAKE_SYSTEM_NAME": "Windows"
+			}
+		},
+		{
+			"name": "x64-debug",
+			"displayName": "x64 Debug",
+			"generator": "Ninja",
+			"cacheVariables": {
+				"CMAKE_BUILD_TYPE": "Debug",
+				"CMAKE_SYSTEM_NAME": "Windows"
+			}
+		},
+		{
+			"name": "emscripten-release",
+			"displayName": "Emscripten Release",
+			"generator": "Ninja",
+			"toolchainFile": "$env{EMSDK}/upstream/emscripten/cmake/Modules/Platform/Emscripten.cmake",
+			"cacheVariables": {
+				"CMAKE_BUILD_TYPE": "Release",
+				"CMAKE_SYSTEM_NAME": "Emscripten"
+			}
+		},
+		{
+			"name": "emscripten-debug",
+			"displayName": "Emscripten Debug",
+			"generator": "Ninja",
+			"toolchainFile": "$env{EMSDK}/upstream/emscripten/cmake/Modules/Platform/Emscripten.cmake",
+			"cacheVariables": {
+				"CMAKE_BUILD_TYPE": "Debug",
+				"CMAKE_SYSTEM_NAME": "Emscripten"
+			}
+		}
+	]
+}

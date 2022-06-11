@@ -29,7 +29,7 @@ void draw_text_at(SDL_Renderer* scr, const char* msg, int x0, int y0)
 		exit(2);
 	}
 
-	TTF_Font* font = TTF_OpenFont("font.ttf", 72);
+	TTF_Font* font = TTF_OpenFont("resources/font.ttf", 72);
 	SDL_Color White = { 0, 0, 0 };
 
 	// as TTF_RenderText_Solid could only be used on
