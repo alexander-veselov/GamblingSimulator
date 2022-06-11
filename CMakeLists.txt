@@ -21,7 +21,7 @@ if(${CMAKE_SYSTEM_NAME} MATCHES "Emscripten")
 		"source/Application/WebAssembly/*.cpp"
 	)
 	set(THIRD_PARTY_INCLUDES "")
-elseif(${CMAKE_SYSTEM_NAME} MATCHES "Windows")
+elseif(NOT ${CMAKE_SYSTEM_NAME} MATCHES "Emscripten")
 	file(GLOB PLATFORM_SOURCES
 		"source/Application/Windows/*.h"
 		"source/Application/Windows/*.cpp"
@@ -86,7 +86,7 @@ include_directories(
 		"${THIRD_PARTY_PATH}/SDL2_ttf-${SDL2_VERSION}/include"
 )
 
-if(${CMAKE_SYSTEM_NAME} MATCHES "Windows")
+if(NOT ${CMAKE_SYSTEM_NAME} MATCHES "Emscripten")
 	target_link_libraries(${PROJECT_NAME}
 		${SDL2_LIBS}
 		${SDL2_TTF_LIBS}
