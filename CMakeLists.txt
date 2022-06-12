@@ -16,12 +16,23 @@ file(GLOB ALL_SOURCES
      "source/Core/*.cpp"
 )
 
+file(GLOB APPLICATION_SOURCES
+	 "source/Application/*.h"
+     "source/Application/*.cpp"
+)
+
+file(GLOB CORE_SOURCES
+	 "source/Core/*.h"
+     "source/Core/*.cpp"
+)
+
+add_library(CoreLib STATIC ${CORE_SOURCES})
+add_library(ApplicationLib STATIC ${APPLICATION_SOURCES})
+
 file(GLOB TESTS_SOURCES
 	"source/gtestmain.cpp"
 	"source/UnitTests/*.h"
     "source/UnitTests/*.cpp"
-	"source/Core/*.h"
-    "source/Core/*.cpp"
 )
 
 if(MSVC)
@@ -46,7 +57,10 @@ include_directories(${gtest_SOURCE_DIR}/include ${gtest_SOURCE_DIR})
 add_executable(${PROJECT_NAME} ${ALL_SOURCES})
 add_executable(${TESTS_NAME} ${TESTS_SOURCES})
 
+target_link_libraries(${PROJECT_NAME} ApplicationLib CoreLib)
+target_link_libraries(${TESTS_NAME} CoreLib)
 target_link_libraries(${TESTS_NAME} gtest gtest_main)
+
 if(${CMAKE_SYSTEM_NAME} MATCHES "Emscripten")
 	add_test(
 	  NAME ${TESTS_NAME}
