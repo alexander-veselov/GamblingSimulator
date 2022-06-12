@@ -1,21 +1,31 @@
 #pragma once
 
-#include "IEventListener.h"
-#include "Application.h"
+#include "Application/EventListener.h"
 
-#include <memory>
 #include <vector>
 #include <queue>
+
+class IEventListener;
+class Application;
+struct SDL_Window;
+struct SDL_Renderer;
 
 class EventLoop
 {
 public:
-    EventLoop(std::shared_ptr<IPlatform> platform);
-    void AddEventListener(std::shared_ptr<IEventListener> pEventListener);
-    int Run(std::shared_ptr<Application> application);
-    void ProcessFrame();
+    EventLoop();
+    void AddEventListener(IEventListener* pEventListener);
+    int Run(Application* pApplication);
+    
 private:
-    std::vector<std::shared_ptr<IEventListener>> m_EventListeners;
+    void ProcessFrame();
+
+private:
+    std::vector<IEventListener*> m_EventListeners;
     std::queue<Event> m_eventQueue;
-    std::shared_ptr<IPlatform> m_platform;
+    bool m_bRunning = true;
+
+    // TODO: refactor
+    SDL_Window* m_window = nullptr;
+    SDL_Renderer* m_renderer = nullptr;
 };

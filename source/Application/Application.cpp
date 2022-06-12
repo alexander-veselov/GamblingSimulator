@@ -1,5 +1,7 @@
 #include "Application.h"
 
+#include <iostream>
+
 namespace
 {
 	Slot GetSlot()
@@ -19,13 +21,15 @@ namespace
 	}
 }
 
-Application::Application(std::shared_ptr<IPlatform> platform)
-	: m_slot(GetSlot()), m_platform(platform)
-{}
-
-void Application::set(SDL_Renderer* scr)
+Application::Application()
+	: m_slot(GetSlot())
 {
-	this->scr = scr;
+	m_slot.GenerateRandomBoard();
+}
+
+void Application::SetRenderer(SDL_Renderer* renderer)
+{
+	this->renderer = renderer;
 }
 
 void Application::Handle(Event event)
@@ -34,7 +38,7 @@ void Application::Handle(Event event)
 	{
 	case Event::UPDATE:
 	case Event::IDLE:
-		m_platform->GetDisplay()->Display(DisplayData(m_lastWin, m_wonTotal, m_spentTotal, m_slot.GetBoard(), scr));
+		Display(DisplayData(m_lastWin, m_wonTotal, m_spentTotal, m_slot.GetBoard(), renderer));
 		break;
 	case Event::KEY_PRESSED:
 		OnKeyPressed();
@@ -50,4 +54,8 @@ void Application::OnKeyPressed()
 	m_lastWin = m_slot.MakeSpin();
 	m_wonTotal += m_lastWin;
 	++m_spentTotal;
+
+	std::cout << "Last win: " << m_lastWin << std::endl;
+	std::cout << "Total win: " << m_wonTotal << std::endl;
+	std::cout << "Spent: " << m_spentTotal << std::endl;
 }

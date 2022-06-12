@@ -15,19 +15,6 @@ file(GLOB ALL_SOURCES
 	 "source/Core/*.h"
      "source/Core/*.cpp"
 )
-if(${CMAKE_SYSTEM_NAME} MATCHES "Emscripten")
-	file(GLOB PLATFORM_SOURCES
-		"source/Application/WebAssembly/*.h"
-		"source/Application/WebAssembly/*.cpp"
-	)
-	set(THIRD_PARTY_INCLUDES "")
-elseif(NOT ${CMAKE_SYSTEM_NAME} MATCHES "Emscripten")
-	file(GLOB PLATFORM_SOURCES
-		"source/Application/Windows/*.h"
-		"source/Application/Windows/*.cpp"
-	)
-endif()
-list (APPEND ALL_SOURCES ${PLATFORM_SOURCES})
 
 file(GLOB TESTS_SOURCES
 	"source/gtestmain.cpp"
@@ -82,6 +69,7 @@ find_library(SDL2_TTF_LIBS
 	
 include_directories(
 	PRIVATE
+		"${CMAKE_SOURCE_DIR}/source"
 		"${THIRD_PARTY_PATH}/SDL2-${SDL2_VERSION}/include"
 		"${THIRD_PARTY_PATH}/SDL2_ttf-${SDL2_VERSION}/include"
 )
