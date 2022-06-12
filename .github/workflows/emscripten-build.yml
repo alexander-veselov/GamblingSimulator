@@ -18,13 +18,16 @@ jobs:
             - name: Install cmake
               uses: jwlawson/actions-setup-cmake@v1.12
 
+            - name: Setup Node.js environment
+              uses: actions/setup-node@v3.3.0
+
             - name: Build and test Emscripten Debug
               run: |
                   mkdir Debug
                   cd Debug
                   cmake .. --preset emscripten-debug
                   cmake --build .
-                  ctest
+                  ctest --output-on-failure
 
             - name: Build and test Emscripten Release
               run: |
@@ -32,4 +35,4 @@ jobs:
                   cd Release
                   cmake .. --preset emscripten-release
                   cmake --build .
-                  ctest
+                  ctest --output-on-failure

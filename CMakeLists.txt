@@ -52,7 +52,6 @@ if(${CMAKE_SYSTEM_NAME} MATCHES "Emscripten")
 	  NAME ${TESTS_NAME}
 	  COMMAND node "${CMAKE_CURRENT_BINARY_DIR}/${TESTS_NAME}.js"
 	)
-	# TODO: add logging for wrong tests
 else()
 	add_test(
 	  NAME ${TESTS_NAME}
