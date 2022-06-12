@@ -47,10 +47,18 @@ add_executable(${PROJECT_NAME} ${ALL_SOURCES})
 add_executable(${TESTS_NAME} ${TESTS_SOURCES})
 
 target_link_libraries(${TESTS_NAME} gtest gtest_main)
-add_test(
-  NAME ${TESTS_NAME}
-  COMMAND node "${CMAKE_CURRENT_BINARY_DIR}/${TESTS_NAME}.js"
-)
+if(${CMAKE_SYSTEM_NAME} MATCHES "Emscripten")
+	add_test(
+	  NAME ${TESTS_NAME}
+	  COMMAND node "${CMAKE_CURRENT_BINARY_DIR}/${TESTS_NAME}.js"
+	)
+	# TODO: add logging for wrong tests
+else()
+	add_test(
+	  NAME ${TESTS_NAME}
+	  COMMAND $<TARGET_FILE:${TESTS_NAME}>
+	)
+endif()
 
 set(THIRD_PARTY_PATH ${CMAKE_SOURCE_DIR}/third-party)
 

@@ -1,16 +1,13 @@
-name: Emscripten build and test
+name: Windows x64 build and test
 on: [push]
 env:
     CMAKE_VERSION: 3.10.0
     NINJA_VERSION: 1.10.0
 jobs:
     build:
-        runs-on: ubuntu-latest
+        runs-on: windows-latest
         steps:
             - uses: actions/checkout@v2
-
-            - name: Setup Emscripten toolchain
-              uses: mymindstorm/setup-emsdk@v11
 
             - name: Install ninja
               uses: seanmiddleditch/gha-setup-ninja@v3
@@ -18,18 +15,18 @@ jobs:
             - name: Install cmake
               uses: jwlawson/actions-setup-cmake@v1.12
 
-            - name: Build and test Emscripten Debug
+            - name: Build and test Windows-x64 Debug
               run: |
                   mkdir Debug
                   cd Debug
-                  cmake .. --preset emscripten-debug
+                  cmake .. --preset x64-debug
                   cmake --build .
                   ctest
 
-            - name: Build and test Emscripten Release
+            - name: Build and test Windows-x64 Release
               run: |
                   mkdir Release
                   cd Release
-                  cmake .. --preset emscripten-release
+                  cmake .. --preset x64-release
                   cmake --build .
                   ctest

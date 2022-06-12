@@ -38,8 +38,3 @@ TEST(TestSlot, Lines1)
 
 	EXPECT_EQ(slot.MakeSpin(), 0);
 }
-
-TEST(TestActions, AssertTrue)
-{
-	ASSERT_TRUE(false);
-}
