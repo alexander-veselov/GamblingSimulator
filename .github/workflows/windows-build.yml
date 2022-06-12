@@ -1,4 +1,4 @@
-name: Windows x64 build and test
+name: Build and test Windows x64
 on: [push]
 env:
     CMAKE_VERSION: 3.10.0

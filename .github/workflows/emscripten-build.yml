@@ -1,4 +1,4 @@
-name: Emscripten build and test
+name: Build and test Emscripten 
 on: [push]
 env:
     CMAKE_VERSION: 3.10.0

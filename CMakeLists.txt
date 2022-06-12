@@ -112,7 +112,6 @@ if(${CMAKE_SYSTEM_NAME} MATCHES "Emscripten")
 	set_target_properties(${PROJECT_NAME} PROPERTIES SUFFIX .html)
 	set_target_properties(${TESTS_NAME} PROPERTIES SUFFIX .html)
 	set_target_properties(${PROJECT_NAME} PROPERTIES LINK_FLAGS ${FLAGS_STR})
-	set_target_properties(${TESTS_NAME} PROPERTIES LINK_FLAGS ${FLAGS_STR})
 endif()
 
 file(INSTALL resources DESTINATION .)
