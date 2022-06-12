@@ -1,0 +1,35 @@
+name: Emscripten build and test
+on: [push]
+env:
+    CMAKE_VERSION: 3.10.0
+    NINJA_VERSION: 1.10.0
+jobs:
+    build:
+        runs-on: ubuntu-latest
+        steps:
+            - uses: actions/checkout@v2
+
+            - name: Setup Emscripten toolchain
+              uses: mymindstorm/setup-emsdk@v11
+
+            - name: Install ninja
+              uses: seanmiddleditch/gha-setup-ninja@v3
+
+            - name: Install cmake
+              uses: jwlawson/actions-setup-cmake@v1.12
+
+            - name: Build Emscripten Release
+              run: |
+                  mkdir Release
+                  cd Release
+                  cmake .. --preset emscripten-release
+                  cmake --build .
+                  ctest
+
+            - name: Build Emscripten Debug
+              run: |
+                  mkdir Debug
+                  cd Debug
+                  cmake .. --preset emscripten-debug
+                  cmake --build .
+                  ctest

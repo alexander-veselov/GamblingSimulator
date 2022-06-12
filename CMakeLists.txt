@@ -49,7 +49,7 @@ add_executable(${TESTS_NAME} ${TESTS_SOURCES})
 target_link_libraries(${TESTS_NAME} gtest gtest_main)
 add_test(
   NAME ${TESTS_NAME}
-  COMMAND $<TARGET_FILE:${TESTS_NAME}>
+  COMMAND node "${CMAKE_CURRENT_BINARY_DIR}/${TESTS_NAME}.js"
 )
 
 set(THIRD_PARTY_PATH ${CMAKE_SOURCE_DIR}/third-party)
