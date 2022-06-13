@@ -18,5 +18,4 @@ else()
 	set(TESTS_RUN_COMMAND $<TARGET_FILE:${TESTS_NAME}>)
 endif()
 
-enable_testing()
 add_test(NAME ${TESTS_NAME} COMMAND ${TESTS_RUN_COMMAND})

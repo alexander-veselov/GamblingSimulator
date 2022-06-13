@@ -9,6 +9,8 @@ set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR})
 
 project(${PROJECT_NAME})
 
+enable_testing()
+
 add_executable(${PROJECT_NAME} source/main.cpp)
 target_compile_features(${PROJECT_NAME} PUBLIC cxx_std_17)
 
