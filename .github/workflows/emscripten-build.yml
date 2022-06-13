@@ -12,7 +12,7 @@ jobs:
             - name: Setup Emscripten toolchain
               uses: mymindstorm/setup-emsdk@v11
 
-            - name: Install ninja
+            - name: Install ninja-build tool
               uses: seanmiddleditch/gha-setup-ninja@v3
 
             - name: Install cmake
@@ -21,18 +21,22 @@ jobs:
             - name: Setup Node.js environment
               uses: actions/setup-node@v3.3.0
 
-            - name: Build and test Emscripten Debug
+            - name: Build Debug
               run: |
                   mkdir Debug
                   cd Debug
                   cmake .. --preset emscripten-debug
                   cmake --build .
-                  ctest --output-on-failure
 
-            - name: Build and test Emscripten Release
+            - name: Test Debug
+              run: ctest --output-on-failure
+
+            - name: Build Release
               run: |
                   mkdir Release
                   cd Release
                   cmake .. --preset emscripten-release
                   cmake --build .
-                  ctest --output-on-failure
+
+            - name: Test Release
+              run: ctest --output-on-failure
