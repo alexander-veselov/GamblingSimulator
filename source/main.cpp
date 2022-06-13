@@ -5,7 +5,7 @@
 
 #include <iostream>
 
-int main() broken code
+int main()
 {
 	Application application;
 	

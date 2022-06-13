@@ -9,7 +9,7 @@ jobs:
         steps:
             - uses: actions/checkout@v2
 
-            - name: Install ninja
+            - name: Install ninja-build tool
               uses: seanmiddleditch/gha-setup-ninja@v3
 
             - name: Install cmake
