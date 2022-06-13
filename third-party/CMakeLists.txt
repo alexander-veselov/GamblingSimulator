@@ -41,14 +41,6 @@ if(WIN32)
 	file(GLOB SDL2_TTF_DLLS ${SDL2_TTF_LIBS_PATH}/*.dll)
 	list(APPEND SDL2_DLLS ${SDL2_TTF_DLLS})
 	foreach(SDL2_DLL ${SDL2_DLLS})
-		add_custom_command(
-			OUTPUT ${CMAKE_BINARY_DIR}/${SDL2_DLL}
-			COMMAND ${CMAKE_COMMAND} -E copy_if_different ${SDL2_DLL} ${CMAKE_BINARY_DIR}
-			DEPENDS ${PROJECT_NAME}
-		)
-		get_filename_component(LIB_NAME ${SDL2_DLL} NAME)
-		add_custom_target(COPY_${LIB_NAME} ALL
-			DEPENDS ${CMAKE_BINARY_DIR}/${SDL2_DLL}
-		)
+		file(COPY ${SDL2_DLL} DESTINATION ${CMAKE_BINARY_DIR})
 	endforeach()
 endif()

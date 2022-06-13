@@ -13,7 +13,7 @@ target_link_libraries(${TESTS_NAME} gtest gtest_main CoreLib)
 
 if(${CMAKE_SYSTEM_NAME} MATCHES "Emscripten")
 	set_target_properties(${TESTS_NAME} PROPERTIES SUFFIX .html)
-	set(TESTS_RUN_COMMAND node "${CMAKE_CURRENT_BINARY_DIR}/${TESTS_NAME}.js")
+	set(TESTS_RUN_COMMAND node "${CMAKE_BINARY_DIR}/${TESTS_NAME}.js")
 else()
 	set(TESTS_RUN_COMMAND $<TARGET_FILE:${TESTS_NAME}>)
 endif()
